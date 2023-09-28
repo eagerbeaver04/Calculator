@@ -1,6 +1,0 @@
-﻿  Source.cpp
-C:\visual studio_poly\5 семестр\Calculator\Func.h(58): warning C4715: div_: значение возвращается не при всех путях выполнения
-C:\visual studio_poly\5 семестр\Calculator\Operations.h(44): warning C4715: Operations::getNameBySymbol: значение возвращается не при всех путях выполнения
-C:\visual studio_poly\5 семестр\Calculator\Operations.h(51): warning C4715: Operations::getPriorityBySymbol: значение возвращается не при всех путях выполнения
-C:\visual studio_poly\5 семестр\Calculator\Operations.h(37): warning C4715: Operations::getOperationBySymbol: значение возвращается не при всех путях выполнения
-  Calculator.vcxproj -> C:\visual studio_poly\5 семестр\Calculator\Debug\Calculator.exe
