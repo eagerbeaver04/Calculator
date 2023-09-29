@@ -36,6 +36,12 @@ private:
 		this->folder_path = "";
 		this->extension = "";
 	}
+	~Loader()
+	{
+		for (auto& lib : lib_list)
+			FreeLibrary(lib);
+		lib_list.clear();
+	}
 };
 
 #endif

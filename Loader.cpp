@@ -24,9 +24,8 @@ Operator* Loader::getOperatorFromDll(std::filesystem::path path)
 	Priority = (int_fun)GetProcAddress(load, "priority");
 	Name = (str_fun)GetProcAddress(load, "name");
 	Associativity = (bool_fun)GetProcAddress(load, "associativity");
-	Operator* op = new Operator(Name(), Priority(), Associativity(), Binary(), Fun);
 
-	//FreeLibrary(load); add in destructor Calculator
+	Operator* op = new Operator(Name(), Priority(), Associativity(), Binary(), Fun);
 
 	return op;
 }
