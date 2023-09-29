@@ -22,7 +22,7 @@ public:
 	}
 	void calculating(const std::string& symbol, double a, double b)
 	{
-		std::cout << operaions_map->ñalculation(symbol, a, b);
+		std::cout << operaions_map->ñalculation(symbol, a, b);//example
 	}
 private:
 	Operations* operaions_map;

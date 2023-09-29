@@ -38,7 +38,8 @@ public:
 	};
 	Operations(const std::string& folder_path, const std::string& extension): Operations()
 	{
-		loadDll(this->operation_list, folder_path, extension);
+		Loader* loader = Loader::getInstance(folder_path, extension);
+		loader->loadDll(this->operation_list, folder_path, extension);
 	};
 
 	void *getOperation(const std::string& symbol);

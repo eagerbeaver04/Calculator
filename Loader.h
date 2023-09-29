@@ -7,51 +7,35 @@
 #include <vector>
 #include <filesystem>
 #include "Func.h"
+#include <vector>
 
-inline Operator* getOperatorFromDll(std::filesystem::path path)
+class Loader
 {
-	const wchar_t* widecFileName = path.c_str();
-
-	HINSTANCE load;
-	load = LoadLibraryW(widecFileName);
-
-	typedef double (*double_fun_2) (double, double);
-	typedef int (*int_fun) (void);
-	typedef std::string(*str_fun) (void);
-	typedef bool (*bool_fun) (void);
-
-	double_fun_2 Fun;
-	int_fun Binary;
-	int_fun Priority;
-	str_fun Name;
-	bool_fun Associativity;
-
-	Fun = (double_fun_2)GetProcAddress(load, "operation");
-	Binary = (int_fun)GetProcAddress(load, "binary");
-	Priority = (int_fun)GetProcAddress(load, "priority");
-	Name = (str_fun)GetProcAddress(load, "name");
-	Associativity = (bool_fun)GetProcAddress(load, "associativity");
-	Operator* op = new Operator(Name(), Priority(), Associativity(), Binary(), Fun);
-
-	//FreeLibrary(load); add in destructor Calculator
-
-	return op;
-}
-
-inline void loadDll(std::map<std::string, Operator*>& operation_list, const std::string& folder_path, const std::string& extension)
-{
-	std::vector<std::filesystem::path> files;
-
-	for (auto& entry : std::filesystem::directory_iterator(folder_path))
-		if (entry.path().extension() == extension)
-			files.push_back(entry.path().c_str());
-
-	for (auto& path : files)
+public:
+	static Loader* getInstance(const std::string& folder_path, const std::string& extension)
 	{
-		Operator* op = getOperatorFromDll(path);
-		operation_list[op->getName()] = op;
+		static Loader* instance = new Loader(folder_path, extension);
+		return instance;
 	}
-		
-}
+	Operator* getOperatorFromDll(std::filesystem::path path);
+	void loadDll(std::map<std::string, Operator*>& operation_list, const std::string& folder_path, const std::string& extension);
+private:
+	std::vector< HINSTANCE> lib_list;
+	std::string folder_path;
+	std::string extension;
+
+	Loader(const std::string& folder_path, const std::string& extension)
+	{
+		this->lib_list;
+		this->folder_path = folder_path;
+		this->extension = extension;
+	}
+	Loader()
+	{
+		this->lib_list;
+		this->folder_path = "";
+		this->extension = "";
+	}
+};
 
 #endif
