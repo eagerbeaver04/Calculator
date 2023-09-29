@@ -1,11 +1,14 @@
+#pragma once
 #ifndef LOADER_H
 #define LOADER_H
+
 #include <Windows.h>
-#include "Operations.h"
+#include <map>
 #include <vector>
 #include <filesystem>
+#include "Func.h"
 
-Operator* getFunction(filesystem::path path)
+inline Operator* getOperatorFromDll(std::filesystem::path path)
 {
 	const wchar_t* widecFileName = path.c_str();
 
@@ -14,7 +17,7 @@ Operator* getFunction(filesystem::path path)
 
 	typedef double (*double_fun_2) (double, double);
 	typedef int (*int_fun) (void);
-	typedef string(*str_fun) (void);
+	typedef std::string(*str_fun) (void);
 	typedef bool (*bool_fun) (void);
 
 	double_fun_2 Fun;
@@ -28,24 +31,26 @@ Operator* getFunction(filesystem::path path)
 	Priority = (int_fun)GetProcAddress(load, "priority");
 	Name = (str_fun)GetProcAddress(load, "name");
 	Associativity = (bool_fun)GetProcAddress(load, "associativity");
-
 	Operator* op = new Operator(Name(), Priority(), Associativity(), Binary(), Fun);
 
-	FreeLibrary(load);
+	//FreeLibrary(load); add in destructor Calculator
 
 	return op;
 }
 
-void loadDll(map<string, Operator*>& operation_list, const string& folder_path, const string& extension)
+inline void loadDll(std::map<std::string, Operator*>& operation_list, const std::string& folder_path, const std::string& extension)
 {
-	vector<filesystem::path> files;
+	std::vector<std::filesystem::path> files;
 
-	for (auto& entry : filesystem::directory_iterator(folder_path))
+	for (auto& entry : std::filesystem::directory_iterator(folder_path))
 		if (entry.path().extension() == extension)
 			files.push_back(entry.path().c_str());
 
 	for (auto& path : files)
-		operation_list[getFunction(path)->getName()] = getFunction(path);
+	{
+		Operator* op = getOperatorFromDll(path);
+		operation_list[op->getName()] = op;
+	}
 		
 }
 

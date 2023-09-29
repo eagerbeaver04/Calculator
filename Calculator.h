@@ -1,45 +1,50 @@
+#pragma once
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
-#include <iostream>
 #include "Operations.h"
-using namespace std;
 
 class Calculator 
 {
 public:
-	static Calculator& getInstance()
+	static Calculator* getInstance(const std::string& folder_path, const std::string& extension)
 	{
-		static Calculator instance;
+		static Calculator* instance = new Calculator(folder_path, extension);
 		return instance;
 	}
 	double output()
 	{
 		return this->result;
 	}
-	void setInput(const string& input_)
+	void setInput(const std::string& input_)
 	{
 		this->expression = expression;
 	}
-	void calculating(const string& symbol, double a, double b)
+	void calculating(const std::string& symbol, double a, double b)
 	{
-		cout << ((double (*)(double, double))(this->getOperationBySymbol(symbol)))(a,b);//example
+		std::cout << operaions_map->ñalculation(symbol, a, b);
 	}
 private:
 	Operations* operaions_map;
-	string expression;
+	std::string expression;
 	double result;
 	Calculator()
 	{
 		this->operaions_map = new Operations();
 		this->expression = "";
 		this->result;
+	}
+	Calculator(const std::string& folder_path, const std::string& extension)
+	{
+		this->operaions_map = new Operations(folder_path , extension);
+		this->expression = "";
+		this->result;
 	};
-	void* getOperationBySymbol(const string& symbol);
-	string getNameBySymbol(const string& symbol);
-	int getPriorityBySymbol(const string& symbol);
-	bool getAssociativityBySymbol(const string& symbol);
-	int getBinaryBySymbol(const string& symbol);
+	void* getOperationBySymbol(const std::string& symbol);
+	std::string getNameBySymbol(const std::string& symbol);
+	int getPriorityBySymbol(const std::string& symbol);
+	bool getAssociativityBySymbol(const std::string& symbol);
+	int getBinaryBySymbol(const std::string& symbol);
 	~Calculator()  = default;
 	Calculator(const Calculator&);
 	Calculator& operator= (const Calculator&) {};

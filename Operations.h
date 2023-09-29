@@ -1,8 +1,8 @@
+#pragma once
 #ifndef OPERATIONS_H
 #define OPERATIONS_H
 
-#include <map>
-#include "Func.h"
+#include "Loader.h"
 
 static double sum(double a, double b)
 {
@@ -23,7 +23,7 @@ static double div_(double a, double b)
 {
 	if (b != 0)
 		return a / b;
-	cerr << "Division by zero" << endl;
+	std::cerr << "Division by zero" << std::endl;
 	return a;
 }
 
@@ -36,17 +36,24 @@ public:
 		this->operation_list["*"] = new Operator("*", 2, true, 2, mul);
 		this->operation_list["/"] = new Operator("/", 2, true, 2, div_);
 	};
-	void *getOperation(const string& symbol);
-	string getName(const string& symbol);
-	int getPriority(const string& symbol);
-	bool getAssociativity(const string& symbol);
-	int getBinary(const string& symbol);
+	Operations(const std::string& folder_path, const std::string& extension): Operations()
+	{
+		loadDll(this->operation_list, folder_path, extension);
+	};
+
+	void *getOperation(const std::string& symbol);
+	std::string getName(const std::string& symbol);
+	int getPriority(const std::string& symbol);
+	bool getAssociativity(const std::string& symbol);
+	int getBinary(const std::string& symbol);
+
+	double Òalculation(const std::string& symbol, double a, double b);
+
 	Operations& operator= (const Operations&) = default;
 	~Operations() = default;
 private:
-	map<string, Operator*> operation_list;
+	std::map<std::string, Operator*> operation_list;
 	Operations(const Operations&);
-	// add - directory iterator -> .dll ÔÓ‚ÂÍ‡ Ì‡ Ù‡ÈÎ Ë entry.path.extension
 };
 
 #endif

@@ -1,13 +1,13 @@
+#pragma once
 #ifndef SORTER_H
 #define SORTER_H
 
 #include <iostream>
-using namespace std;
 
 class Sorter
 {
 public:
-	void setInput(const string& input_)
+	void setInput(const std::string& input_)
 	{
 		this->input = input;
 	}
@@ -18,7 +18,7 @@ public:
 	}
 
 private:
-	string input;
+	std::string input;
 	Sorter();
 	~Sorter() {};
 	Sorter(const Sorter&);

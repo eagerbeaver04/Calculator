@@ -1,26 +1,26 @@
 #include "Calculator.h"
 
-void* Calculator::getOperationBySymbol(const string& symbol)
+void* Calculator::getOperationBySymbol(const std::string& symbol)
 {
 	return this->operaions_map->getOperation(symbol);
 }
 
-string Calculator::getNameBySymbol(const string& symbol)
+std::string Calculator::getNameBySymbol(const std::string& symbol)
 {
 	return this->operaions_map->getName(symbol);
 }
 
-int Calculator::getPriorityBySymbol(const string& symbol)
+int Calculator::getPriorityBySymbol(const std::string& symbol)
 {
 	return this->operaions_map->getPriority(symbol);
 }
 
-bool Calculator::getAssociativityBySymbol(const string& symbol)
+bool Calculator::getAssociativityBySymbol(const std::string& symbol)
 {
 	return this->operaions_map->getAssociativity(symbol);
 }
 
-int Calculator::getBinaryBySymbol(const string& symbol)
+int Calculator::getBinaryBySymbol(const std::string& symbol)
 {
 	return this->operaions_map->getBinary(symbol);
 }
