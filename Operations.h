@@ -4,50 +4,49 @@
 #include <map>
 #include "Func.h"
 
+static double sum(double a, double b)
+{
+	return a + b;
+}
+
+static double sub(double a, double b)
+{
+	return a - b;
+}
+
+static double mul(double a, double b)
+{
+	return a * b;
+}
+
+static double div_(double a, double b)
+{
+	if (b != 0)
+		return a / b;
+	cerr << "Division by zero" << endl;
+	return a;
+}
+
 class Operations:public Operator {
 public:
-	static Operations& getInstance()
-	{
-		static Operations instance;
-		return instance;
-	}
-	void *getOperationBySymbol(const string& symbol);
-	string getNameBySymbol(const string& symbol);
-	int getPriorityBySymbol(const string& symbol);
-private:
-	map<string, Operator*> operation_list;
 	Operations()
 	{
-		this->operation_list["+"] = new Operator("+", 1, *sum);
-		this->operation_list["-"] = new Operator("-", 1, *sub);
-		this->operation_list["*"] = new Operator("*", 2, *mul);
-		this->operation_list["/"] = new Operator("/", 2, *div_);
+		this->operation_list["+"] = new Operator("+", 1, true, 2, sum);
+		this->operation_list["-"] = new Operator("-", 1, true, 2, sub);
+		this->operation_list["*"] = new Operator("*", 2, true, 2, mul);
+		this->operation_list["/"] = new Operator("/", 2, true, 2, div_);
 	};
-	~Operations() {};
+	void *getOperation(const string& symbol);
+	string getName(const string& symbol);
+	int getPriority(const string& symbol);
+	bool getAssociativity(const string& symbol);
+	int getBinary(const string& symbol);
+	Operations& operator= (const Operations&) = default;
+	~Operations() = default;
+private:
+	map<string, Operator*> operation_list;
 	Operations(const Operations&);
-	Operations& operator= (const Operations&) {};
-	// add - directory iterator -> .dll проверка на файл и entry.path.axtension
+	// add - directory iterator -> .dll проверка на файл и entry.path.extension
 };
-
-void *Operations::getOperationBySymbol(const string& symbol)
-{
-	if (this->operation_list.count(symbol) == 1)
-		return this->operation_list[symbol]->getOperation();
-	cerr << "Unavaliable operation: " << symbol << endl;
-}
-
-string Operations::getNameBySymbol(const string& symbol)
-{
-	if (this->operation_list.count(symbol) == 1)
-		return this->operation_list[symbol]->getName();
-	cerr << "Unavaliable operation: " << symbol << endl;
-}
-
-int Operations::getPriorityBySymbol(const string& symbol)
-{
-	if (this->operation_list.count(symbol) == 1)
-		return this->operation_list[symbol]->getPriority();
-	cerr << "Unavaliable operation: " << symbol << endl;
-}
 
 #endif

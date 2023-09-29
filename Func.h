@@ -6,11 +6,13 @@ using namespace std;
 class Operator
 {
 public:
-	Operator(const string& name, int prority, double (*operation) (double a, double b))
+	Operator(const string& name, int priority, bool associativity, int binary, double (*operation) (double a, double b))
 	{
 		this->name = name;
 		this->priority = priority;
 		this->operation = operation;
+		this->associativity = associativity;
+		this->binary = binary;
 	}
 	Operator() = default;
 	~Operator() = default;
@@ -23,6 +25,14 @@ public:
 	{
 		return this->name;
 	}
+	int getBinary()
+	{
+		return this->binary;
+	}
+	bool getAssociativity()
+	{
+		return this->associativity;
+	}
 	void *getOperation()
 	{
 		return this->operation;
@@ -30,31 +40,12 @@ public:
 private:
 	string name;
 	int priority;
+	bool associativity;// true - left, false - right
+	int binary;
 	double (*operation)(double, double);
+
 	Operator(const Operator& A);
 	Operator& operator = (const Operator& A);
 };
-
-double sum(double a, double b)
-{
-	return a + b;
-}
-
-double sub(double a, double b)
-{
-	return a - b;
-}
-
-double mul(double a, double b)
-{
-	return a * b;
-}
-
-double div_(double a, double b)
-{
-	if (b != 0)
-		return a / b;
-	cerr << "Division by zero" << endl;
-}
 
 #endif
