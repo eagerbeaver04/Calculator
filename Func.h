@@ -41,8 +41,15 @@ public:
 		return this->operation;
 	}
 	double calculation(double a, double b)
-	{	
-		return (this->operation)(a, b);
+	{
+		try
+		{
+			return (this->operation)(a, b);
+		}
+		catch (const std::string& error_message)
+		{
+			std::cerr << error_message << std::endl;
+		}
 	}
 private:
 	std::string name;

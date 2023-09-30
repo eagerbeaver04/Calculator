@@ -13,19 +13,19 @@ Operator* Loader::getOperatorFromDll(std::filesystem::path path)
 	typedef std::string(*str_fun) (void);
 	typedef bool (*bool_fun) (void);
 
-	double_fun_2 Fun;
+	double_fun_2 Operation;
 	int_fun Binary;
 	int_fun Priority;
 	str_fun Name;
 	bool_fun Associativity;
 
-	Fun = (double_fun_2)GetProcAddress(load, "operation");
+	Operation = (double_fun_2)GetProcAddress(load, "operation");
 	Binary = (int_fun)GetProcAddress(load, "binary");
 	Priority = (int_fun)GetProcAddress(load, "priority");
 	Name = (str_fun)GetProcAddress(load, "name");
 	Associativity = (bool_fun)GetProcAddress(load, "associativity");
 
-	Operator* op = new Operator(Name(), Priority(), Associativity(), Binary(), Fun);
+	Operator* op = new Operator(Name(), Priority(), Associativity(), Binary(), Operation);
 
 	return op;
 }

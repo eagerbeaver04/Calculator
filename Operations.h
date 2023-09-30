@@ -21,10 +21,9 @@ static double mul(double a, double b)
 
 static double div_(double a, double b)
 {
-	if (b != 0)
+	if (b)
 		return a / b;
-	std::cerr << "Division by zero" << std::endl;
-	return a;
+	throw std::string{ "Division by zero!" };
 }
 
 class Operations:public Operator {

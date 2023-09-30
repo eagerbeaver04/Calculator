@@ -2,7 +2,7 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
-#include "Operations.h"
+#include "Parser.h"
 
 class Calculator 
 {
@@ -22,21 +22,16 @@ public:
 	}
 	void calculating(const std::string& symbol, double a, double b)
 	{
-		std::cout << operaions_map->ñalculation(symbol, a, b);//example
+		std::cout << operaions_map->operaions_map->ñalculation(symbol, a, b);//example
 	}
+	Parser* operaions_map;
 private:
-	Operations* operaions_map;
+	//Parser* operaions_map;
 	std::string expression;
 	double result;
-	Calculator()
-	{
-		this->operaions_map = new Operations();
-		this->expression = "";
-		this->result;
-	}
 	Calculator(const std::string& folder_path, const std::string& extension)
 	{
-		this->operaions_map = new Operations(folder_path , extension);
+		this->operaions_map = Parser::getInstance(folder_path, extension);
 		this->expression = "";
 		this->result;
 	};

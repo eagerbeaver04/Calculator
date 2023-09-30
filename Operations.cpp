@@ -45,5 +45,6 @@ double Operations::ñalculation(const std::string& symbol, double a, double b)
 {
 	if (this->operation_list.count(symbol) == 1)
 		return this->operation_list[symbol]->calculation(a,b);
+	std::cerr << "Unavaliable operation: " << symbol << std::endl;
 	return 0;
 }
