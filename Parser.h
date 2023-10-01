@@ -27,7 +27,7 @@ private:
 	{
 		this->operaions_map = new Operations(folder_path, extension);
 	}
-	~Parser() {};
+	~Parser() = default;
 	Parser(const Parser&);
 	int opPriority(std::string symbol);
 	bool opAssociativity(std::string c);
