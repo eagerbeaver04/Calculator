@@ -3,6 +3,7 @@
 #define SORTER_H
 
 #include "Operations.h"
+#include <sstream>
 
 class Parser
 {
@@ -14,9 +15,10 @@ public:
 	}
 	bool shuntingYard(const std::string& input, std::string& output);
 	bool executionOrder(const std::string& input);
+	double calculation(std::string symbol, double a, double b);
 	Operations* operaions_map;
 private:
-	//Operations* operaions_map;
+	//	Operations* operaions_map;// for tets
 	Parser()
 	{
 		this->operaions_map = new Operations();
@@ -37,6 +39,7 @@ private:
 	bool isIdent(char symbol);
 	bool isLetter(char symbol);
 	bool isLetter(std::string symbol);
+
 };
 
 

@@ -57,6 +57,11 @@ bool Parser::isLetter(std::string symbol)
     return (symbol >= "a" && symbol <= "z");
 }
 
+double Parser::calculation(std::string symbol, double a, double b)
+{
+    return this->operaions_map->ñalculation(symbol, a, b);
+}
+
 bool Parser::shuntingYard(const std::string& input, std::string& output)
 {
     bool interruotion = false;
@@ -196,9 +201,10 @@ bool Parser::shuntingYard(const std::string& input, std::string& output)
 
 bool Parser::executionOrder(const std::string& input) 
 {
-    std::cout << "order: (arguments in reverse order)" << std::endl;
-    std::string stack[32];
-    int length = input.length();
+    //std::cout << "order: (arguments in reverse order)" << std::endl;
+    int const length = input.length();
+    std::vector<std::string> stack(length);
+    std::vector < double > stack2(length);
     int sl = 0;
     int rn = 0;
     for (size_t i = 0; i < length; ++i) 
@@ -207,6 +213,7 @@ bool Parser::executionOrder(const std::string& input)
         std::string c_str = { c };
         if (isIdent(c_str)) 
         {
+            double val;
             char c_current = input[i+1];
             while (c_current != '|')
             {
@@ -216,7 +223,9 @@ bool Parser::executionOrder(const std::string& input)
                 c_current = input[i+1];
             }
             i++;
+            std::istringstream(c_str) >> val;
             stack[sl] = c_str;
+            stack2[sl] = val;
             ++sl;
         }
         else 
@@ -226,7 +235,6 @@ bool Parser::executionOrder(const std::string& input)
                 char c_current = input[i + 1];
                 while (c_current != '|')
                 {
-
                     c_str += c_current;
                     i++;
                     c_current = input[i + 1];
@@ -237,9 +245,9 @@ bool Parser::executionOrder(const std::string& input)
             if (isOperator(c_str) || isFunction(c_str)) 
             {
                 int nargs = opBinary(c_str);
-                std::cout << nargs << std::endl;
                 int Tnargs = nargs;
-                std::string res = "_" + std::to_string(rn++);
+                double val = 0;
+                std::string res = "(" +  std::to_string(rn++) + ")";
                 std::cout << res << " = ";
 
                 if (sl < nargs) 
@@ -251,26 +259,36 @@ bool Parser::executionOrder(const std::string& input)
                 if (nargs == 1)
                 {
                     std::string sc = stack[sl - 1];
+                    double sc2 = stack2[sl - 1];
                     sl--;
-                    std::cout << c_str << " " << sc << ";" << std::endl;
+                    val = calculation(c_str, sc2, 0);
+                    if(opAssociativity(c_str))
+                        std::cout << c_str << " " << sc << " = " << val << std::endl;
+                    else
+                        std::cout  << sc << " " << c_str  << " = " << val << std::endl;
                 }
                 else
                 {
                     std::string sc1 = stack[sl - 2];
+                    double sc21 = stack2[sl - 2];
                     std::cout << sc1 << " " << c << " ";
                     std::string sc2 = stack[sl - 1];
-                    std::cout << sc2 << ";" << std::endl;
+                    double sc22 = stack2[sl - 1];
+                    val = calculation(c_str, sc21, sc22);
+                    std::cout << sc2 << " = " << val << std::endl;
                     sl -= 2;
                 }
                 stack[sl] = res;
+                stack2[sl] = val;
                 ++sl;
             }
         }
     }
     if (sl == 1) {
         std::string sc = stack[sl - 1];
+        double sc1 = stack2[sl - 1];
         sl--;
-        //std::cout << sc << " is a result" << std::endl;
+        std::cout << "Result : " << sc << " = " << sc1 << std::endl;
         return true;
     }
     std::cout << "Error: too many values entered by the user" << std::endl;

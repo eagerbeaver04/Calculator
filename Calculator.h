@@ -22,11 +22,11 @@ public:
 	}
 	void calculating(const std::string& symbol, double a, double b)
 	{
-		std::cout << operaions_map->operaions_map->ñalculation(symbol, a, b);//example
+		std::cout << operaions_map->calculation(symbol, a, b);
 	}
-	Parser* operaions_map;
+	Parser* operaions_map;//for tests
 private:
-	//Parser* operaions_map;
+	
 	std::string expression;
 	double result;
 	Calculator(const std::string& folder_path, const std::string& extension)
@@ -35,11 +35,6 @@ private:
 		this->expression = "";
 		this->result;
 	};
-	void* getOperationBySymbol(const std::string& symbol);
-	std::string getNameBySymbol(const std::string& symbol);
-	int getPriorityBySymbol(const std::string& symbol);
-	bool getAssociativityBySymbol(const std::string& symbol);
-	int getBinaryBySymbol(const std::string& symbol);
 	~Calculator()  = default;
 	Calculator(const Calculator&);
 	Calculator& operator= (const Calculator&) {};
