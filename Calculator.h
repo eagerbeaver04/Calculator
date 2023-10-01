@@ -16,10 +16,6 @@ public:
 	{
 		this->input = input;
 	}
-	void calculating(const std::string& symbol, double a, double b)
-	{
-		std::cout << operaions_map->calculation(symbol, a, b);// for tests
-	}
 	void calculation()
 	{
 		if (this->operaions_map->shuntingYard(this->input, this->output))

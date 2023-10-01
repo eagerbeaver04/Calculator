@@ -3,7 +3,7 @@
 
 int Parser::opPriority(std::string symbol)
 {
-	return this->operaions_map->getPriority(symbol);
+    return this->operaions_map->getPriority(symbol);
 }
 
 bool Parser::opAssociativity(std::string symbol)
@@ -64,13 +64,13 @@ double Parser::calculation(std::string symbol, double a, double b)
 
 bool Parser::shuntingYard(const std::string& input, std::string& output)
 {
-    bool interruotion = false;
+    bool interruption = false;
     std::stack<std::string> op_stack;
     int length = input.length();
     output = "";
-    for (size_t i = 0; i < length; ++i) 
+    for (int i = 0; i < length; ++i) 
     {
-        if (interruotion == true)
+        if (interruption == true)
         {
             std::cerr << " Process was interrupted" << std::endl;
             std::cerr << " Please, rewrite expression" << std::endl;
@@ -102,7 +102,7 @@ bool Parser::shuntingYard(const std::string& input, std::string& output)
                 if (!pe)
                 {
                     std::cout << "Error: parentheses mismatched" << std::endl;
-                    interruotion = true;
+                    interruption = true;
                     return false;
                 }
                 if (!op_stack.empty())
@@ -130,8 +130,8 @@ bool Parser::shuntingYard(const std::string& input, std::string& output)
                             c_str += c_current;
                         else
                         {
-                            std::cerr << " More than one dote in number :" << c_str << std::endl;
-                            interruotion = true;
+                            std::cerr << " More than one dot in number :" << c_str << std::endl;
+                            interruption = true;
                             break;
                         }
                     }
@@ -180,7 +180,7 @@ bool Parser::shuntingYard(const std::string& input, std::string& output)
             else 
             {
                 std::cout << "Unknown token in" << c_str << std::endl;
-                interruotion = true;
+                interruption = true;
                 return false;
             }
         }
@@ -191,7 +191,7 @@ bool Parser::shuntingYard(const std::string& input, std::string& output)
         if (sc == "(" || sc == ")") 
         {
             std::cout << "Error: parentheses mismatched" << std::endl;
-            interruotion = true;
+            interruption = true;
             return false;
         }
         output += sc + "|";
@@ -206,7 +206,7 @@ bool Parser::executionOrder(const std::string& input)
     std::vector < double > stack2(length);
     int sl = 0;
     int rn = 0;
-    for (size_t i = 0; i < length; ++i) 
+    for (int i = 0; i < length; ++i) 
     {
         char c = input[i];
         std::string c_str = { c };
