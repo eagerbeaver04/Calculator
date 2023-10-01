@@ -1,22 +1,5 @@
 #include "Operations.h"
 
-void* Operations::getOperation(const std::string& symbol)
-{
-	if (this->operation_list.count(symbol) == 1)
-		return this->operation_list[symbol]->getOperation();
-	std::cerr << "Unavaliable operation: " << symbol << std::endl;
-	return *sum;
-	//add reset input string
-}
-
-std::string Operations::getName(const std::string& symbol)
-{
-	if (this->operation_list.count(symbol) == 1)
-		return this->operation_list[symbol]->getName();
-	std::cerr << "Unavaliable operation: " << symbol << std::endl;
-	return "sum";
-}
-
 int Operations::getPriority(const std::string& symbol)
 {
 	if (this->operation_list.count(symbol) == 1)

@@ -10,15 +10,12 @@ int main(int argc, char** argv)
 	std::cout << std::endl;
 	s->calculating("!", 4, 0);
 	std::cout << std::endl;
+	s->calculating("sin", 2, 0);
+	std::cout << std::endl;
 
-	const std::string input = " 4! + sin(0 + sin(3.14)) + 5^(2 * 3 - 4) - 14 ";
-	std::string output;
-	std::cout << "input: " << input << std::endl;
-	if (s->operaions_map->shuntingYard(input, output)) 
-	{
-		//std::cout << "output: " << output << std::endl;
-		s->operaions_map->executionOrder(output);
-	}
+	const std::string input = " 4! + sin(0 + sin(3.14)) + 5^(2 * 3 - 4) - 14 / 2";
+	s->setInput(input);
+	s->calculation();
 	std::cout << std::endl;
 	return 0;
 

@@ -12,28 +12,28 @@ public:
 		static Calculator* instance = new Calculator(folder_path, extension);
 		return instance;
 	}
-	double output()
+	void setInput(const std::string& input)
 	{
-		return this->result;
-	}
-	void setInput(const std::string& input_)
-	{
-		this->expression = expression;
+		this->input = input;
 	}
 	void calculating(const std::string& symbol, double a, double b)
 	{
-		std::cout << operaions_map->calculation(symbol, a, b);
+		std::cout << operaions_map->calculation(symbol, a, b);// for tests
 	}
-	Parser* operaions_map;//for tests
+	void calculation()
+	{
+		if (this->operaions_map->shuntingYard(this->input, this->output))
+			this->operaions_map->executionOrder(this->output);
+	}
 private:
-	
-	std::string expression;
-	double result;
+	Parser* operaions_map;
+	std::string input;
+	std::string output;
 	Calculator(const std::string& folder_path, const std::string& extension)
 	{
 		this->operaions_map = Parser::getInstance(folder_path, extension);
-		this->expression = "";
-		this->result;
+		this->input = "";
+		this->output = "";
 	};
 	~Calculator()  = default;
 	Calculator(const Calculator&);

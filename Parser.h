@@ -4,6 +4,7 @@
 
 #include "Operations.h"
 #include <sstream>
+#include <stack>
 
 class Parser
 {
@@ -16,9 +17,8 @@ public:
 	bool shuntingYard(const std::string& input, std::string& output);
 	bool executionOrder(const std::string& input);
 	double calculation(std::string symbol, double a, double b);
-	Operations* operaions_map;
 private:
-	//	Operations* operaions_map;// for tets
+	Operations* operaions_map;
 	Parser()
 	{
 		this->operaions_map = new Operations();
@@ -29,7 +29,6 @@ private:
 	}
 	~Parser() {};
 	Parser(const Parser&);
-	Parser& operator= (const Parser&);
 	int opPriority(std::string symbol);
 	bool opAssociativity(std::string c);
 	int opBinary(std::string symbol);

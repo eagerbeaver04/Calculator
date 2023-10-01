@@ -21,12 +21,13 @@ static double mul(double a, double b)
 
 static double div_(double a, double b)
 {
-	if (b)
-		return a / b;
-	throw std::string{ "Division by zero!" };
+	if (!b)
+		throw std::exception();
+	return a / b;
 }
 
-class Operations:public Operator {
+class Operations:public Operator 
+{
 public:
 	Operations()
 	{
@@ -41,19 +42,17 @@ public:
 		loader->loadDll(this->operation_list, folder_path, extension);
 	};
 
-	void *getOperation(const std::string& symbol);
-	std::string getName(const std::string& symbol);
 	int getPriority(const std::string& symbol);
 	bool getAssociativity(const std::string& symbol);
 	int getBinary(const std::string& symbol);
 
 	double ñalculation(const std::string& symbol, double a, double b);
 
-	Operations& operator= (const Operations&) = default;
-	~Operations() = default;
 private:
 	std::map<std::string, Operator*> operation_list;
 	Operations(const Operations&);
+	Operations& operator= (const Operations&) = default;
+	~Operations() = default;
 };
 
 #endif

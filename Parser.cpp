@@ -1,5 +1,5 @@
 #include "Parser.h"
-#include <stack>
+
 
 int Parser::opPriority(std::string symbol)
 {
@@ -201,7 +201,6 @@ bool Parser::shuntingYard(const std::string& input, std::string& output)
 
 bool Parser::executionOrder(const std::string& input) 
 {
-    //std::cout << "order: (arguments in reverse order)" << std::endl;
     int const length = input.length();
     std::vector<std::string> stack(length);
     std::vector < double > stack2(length);
