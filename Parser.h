@@ -2,7 +2,6 @@
 #ifndef SORTER_H
 #define SORTER_H
 
-#include <iostream>
 #include "Operations.h"
 
 class Parser
@@ -35,7 +34,9 @@ private:
 	bool isOperator(std::string symbol);
 	bool isFunction(std::string symbol);
 	bool isIdent(std::string symbol);
-
+	bool isIdent(char symbol);
+	bool isLetter(char symbol);
+	bool isLetter(std::string symbol);
 };
 
 
