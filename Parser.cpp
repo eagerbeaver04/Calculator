@@ -22,11 +22,10 @@ bool Parser::isOperator(std::string symbol)
         return false;
 	bool acc = this->opAssociativity(symbol);
 	int bin = this->opBinary(symbol);
-	if ((acc == true && bin == 2) || (acc == false && bin == 1))
+	if ((acc == true && bin == 2) || (acc == false && bin == 1) )
 		return true;
 	return false;
 }
-
 
 bool Parser::isFunction(std::string symbol)
 {

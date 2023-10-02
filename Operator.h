@@ -11,13 +11,12 @@ public:
 	{
 		this->name = name;
 		this->priority = priority;
-		//this->operation = new (double(double,double));
 		this->operation = operation;
 		this->associativity = associativity;
 		this->binary = binary;
 	}
 	Operator() = default;
-	
+	~Operator() = default;
 	Operator(const Operator& A) = default;
 	Operator& operator = (const Operator& A) = default;
 
