@@ -7,7 +7,7 @@ This project is calculator based on Shunting yard algorithm which produce Revers
 1. Addition - "+"
 2. Substraction - "-"
 3. Multiplication - "*"
-4. Division - "/". 
+4. Division - "/"
 
 ## Download dll files from plugins folder for some new functions:
 1. Pow - "^" 
