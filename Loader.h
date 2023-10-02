@@ -1,4 +1,3 @@
-#pragma once
 #ifndef LOADER_H
 #define LOADER_H
 
@@ -6,7 +5,7 @@
 #include <map>
 #include <vector>
 #include <filesystem>
-#include "Func.h"
+#include "Operator.h"
 #include <vector>
 
 class Loader

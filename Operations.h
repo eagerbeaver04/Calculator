@@ -1,4 +1,3 @@
-#pragma once
 #ifndef OPERATIONS_H
 #define OPERATIONS_H
 
@@ -26,7 +25,7 @@ static double div_(double a, double b)
 	return a / b;
 }
 
-class Operations:public Operator 
+class Operations
 {
 public:
 	Operations()
@@ -47,12 +46,13 @@ public:
 	int getBinary(const std::string& symbol);
 
 	double ñalculation(const std::string& symbol, double a, double b);
-
+	~Operations() {
+		for (auto& op : operation_list)
+			delete op.second;
+		operation_list.clear();
+	}
 private:
 	std::map<std::string, Operator*> operation_list;
-	Operations(const Operations&);
-	Operations& operator= (const Operations&) = default;
-	~Operations() = default;
 };
 
 #endif

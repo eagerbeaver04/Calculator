@@ -1,4 +1,3 @@
-#pragma once
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
@@ -18,20 +17,23 @@ public:
 	}
 	void calculation()
 	{
-		if (this->operaions_map->shuntingYard(this->input, this->output))
-			this->operaions_map->executionOrder(this->output);
+		if (this->operations_map->shuntingYard(this->input, this->output))
+			this->operations_map->executionOrder(this->output);
 	}
 private:
-	Parser* operaions_map;
+	Parser* operations_map;
 	std::string input;
 	std::string output;
 	Calculator(const std::string& folder_path, const std::string& extension)
 	{
-		this->operaions_map = Parser::getInstance(folder_path, extension);
+		this->operations_map = new Parser(folder_path, extension);
 		this->input = "";
 		this->output = "";
 	};
-	~Calculator()  = default;
+	~Calculator() 
+	{
+		delete operations_map;
+	};
 	Calculator(const Calculator&);
 	Calculator& operator= (const Calculator&) {};
 };

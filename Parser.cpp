@@ -3,17 +3,17 @@
 
 int Parser::opPriority(std::string symbol)
 {
-    return this->operaions_map->getPriority(symbol);
+    return this->operations_map->getPriority(symbol);
 }
 
 bool Parser::opAssociativity(std::string symbol)
 {
-	return this->operaions_map->getAssociativity(symbol);
+	return this->operations_map->getAssociativity(symbol);
 }
 
 int Parser::opBinary(std::string symbol)
 {
-	return this->operaions_map->getBinary(symbol);
+	return this->operations_map->getBinary(symbol);
 }
 
 bool Parser::isOperator(std::string symbol)
@@ -59,7 +59,7 @@ bool Parser::isLetter(std::string symbol)
 
 double Parser::calculation(std::string symbol, double a, double b)
 {
-    return this->operaions_map->ñalculation(symbol, a, b);
+    return this->operations_map->ñalculation(symbol, a, b);
 }
 
 bool Parser::shuntingYard(const std::string& input, std::string& output)

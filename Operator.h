@@ -1,6 +1,6 @@
 #pragma once
-#ifndef FUNC_H
-#define FUNC_H
+#ifndef OPERATOR_H
+#define OPERATOR_H
 
 #include <iostream>
 
@@ -11,12 +11,13 @@ public:
 	{
 		this->name = name;
 		this->priority = priority;
+		//this->operation = new (double(double,double));
 		this->operation = operation;
 		this->associativity = associativity;
 		this->binary = binary;
 	}
 	Operator() = default;
-	~Operator() = default;
+	
 	Operator(const Operator& A) = default;
 	Operator& operator = (const Operator& A) = default;
 

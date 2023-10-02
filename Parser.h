@@ -1,4 +1,3 @@
-#pragma once
 #ifndef SORTER_H
 #define SORTER_H
 
@@ -9,25 +8,23 @@
 class Parser
 {
 public:
-	static Parser* getInstance(const std::string& folder_path, const std::string& extension)
-	{
-		static Parser* instance = new Parser(folder_path, extension);
-		return instance;
-	}
 	bool shuntingYard(const std::string& input, std::string& output);
 	bool executionOrder(const std::string& input);
 	double calculation(std::string symbol, double a, double b);
-private:
-	Operations* operaions_map;
+	~Parser() 
+	{
+		delete  operations_map;
+	}
 	Parser()
 	{
-		this->operaions_map = new Operations();
+		this->operations_map = new Operations();
 	}
 	Parser(const std::string& folder_path, const std::string& extension)
 	{
-		this->operaions_map = new Operations(folder_path, extension);
+		this->operations_map = new Operations(folder_path, extension);
 	}
-	~Parser() = default;
+private:
+	Operations* operations_map;
 	Parser(const Parser&);
 	int opPriority(std::string symbol);
 	bool opAssociativity(std::string c);
