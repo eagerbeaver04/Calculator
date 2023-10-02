@@ -1,22 +1,22 @@
-## Calculator
-# Calculator on C++ with parser and dll support. 
+# Calculator
+## Calculator on C++ with parser and dll support. 
 
 This project is calculator based on Shunting yard algorithm which produce Reverse Polish notation for input expresiion. 
 
-# Base functions are: 
+## Base functions are: 
 1. Addition - "+"
 2. Substraction - "-"
 3. Multiplication - "*"
 4. Division - "/". 
 
-# Download dll files from plugins folder for some new functions:
+## Download dll files from plugins folder for some new functions:
 1. Pow - "^" 
 2. Factorial - "!"
 3. Sine - "sin"
 
-# Example of input expression:
+## Example of input expression:
 + Your expression(input):  
-+ (2! - sin(3 + 4^(1+2!) - sin(2)) - 9/4) * 3
+1. (2! - sin(3 + 4^(1+2!) - sin(2)) - 9/4) * 3
 
 + Output:
 1. (0) = 2 ! = 2
