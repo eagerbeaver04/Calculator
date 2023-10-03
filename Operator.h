@@ -3,11 +3,12 @@
 #define OPERATOR_H
 
 #include <iostream>
+#include <functional>
 
 class Operator
 {
 public:
-	Operator(const std::string& name, int priority, bool associativity, int binary, double (*operation) (double a, double b))
+	Operator(const std::string& name, int priority, bool associativity, int binary, std::function<double(double, double)> operation)
 	{
 		this->name = name;
 		this->priority = priority;
@@ -36,27 +37,20 @@ public:
 	{
 		return this->associativity;
 	}
-	void *getOperation()
+	std::function<double(double, double)> getOperation()
 	{
 		return this->operation;
 	}
 	double calculation(double a, double b)
 	{
-		try
-		{
-			return (this->operation)(a, b);
-		}
-		catch (const std::string& error_message)
-		{
-			std::cerr << error_message << std::endl;
-		}
+		return (this->operation)(a, b);
 	}
 private:
 	std::string name;
 	int priority;
 	bool associativity;// true - left, false - right
 	int binary;
-	double (*operation)(double, double);
+	std::function<double(double, double)> operation;
 };
 
 #endif
