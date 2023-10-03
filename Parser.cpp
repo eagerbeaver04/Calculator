@@ -1,22 +1,22 @@
 #include "Parser.h"
 
 
-int Parser::opPriority(std::string symbol)
+int Parser::opPriority(const std::string& symbol)
 {
-    return this->operations_map->getPriority(symbol);
+    return this->operations->getPriority(symbol);
 }
 
-bool Parser::opAssociativity(std::string symbol)
+bool Parser::opAssociativity(const std::string& symbol)
 {
-	return this->operations_map->getAssociativity(symbol);
+	return this->operations->getAssociativity(symbol);
 }
 
-int Parser::opBinary(std::string symbol)
+int Parser::opBinary(const std::string& symbol)
 {
-	return this->operations_map->getBinary(symbol);
+	return this->operations->getBinary(symbol);
 }
 
-bool Parser::isOperator(std::string symbol)
+bool Parser::isOperator(const std::string& symbol)
 {
     if (symbol == "(" || symbol == ")")
         return false;
@@ -27,7 +27,7 @@ bool Parser::isOperator(std::string symbol)
 	return false;
 }
 
-bool Parser::isFunction(std::string symbol)
+bool Parser::isFunction(const std::string& symbol)
 {
     if (symbol == "(" || symbol == ")")
         return false;
@@ -36,7 +36,7 @@ bool Parser::isFunction(std::string symbol)
 	return false;
 }
 
-bool Parser::isIdent(std::string symbol) 
+bool Parser::isIdent(const std::string& symbol)
 {
 	return (symbol >= "0" && symbol <= "9");
 }
@@ -51,14 +51,14 @@ bool Parser::isLetter(char symbol)
     return (symbol >= 'a' && symbol <= 'z');
 }
 
-bool Parser::isLetter(std::string symbol)
+bool Parser::isLetter(const std::string& symbol)
 {
     return (symbol >= "a" && symbol <= "z");
 }
 
-double Parser::calculation(std::string symbol, double a, double b)
+double Parser::calculation(const std::string& symbol, double a, double b)
 {
-    return this->operations_map->ñalculation(symbol, a, b);
+    return this->operations->ñalculation(symbol, a, b);
 }
 
 bool Parser::shuntingYard(const std::string& input, std::string& output)

@@ -3,9 +3,9 @@
 
 int main(int argc, char** argv)
 {
-	std::string catalog = "..\\plugins";
+	std::string folder = "..\\plugins";
 	std::string extension = ".dll";
-	Calculator* app = app->getInstance(catalog, extension);
+	Calculator* app = app->getInstance(folder, extension);
 	while (true)
 	{
 		std::string input;

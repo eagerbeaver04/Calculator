@@ -5,8 +5,8 @@ Operator* Loader::getOperatorFromDll(std::filesystem::path path)
 	const wchar_t* widecFileName = path.c_str();
 
 	HINSTANCE load;
-	load = LoadLibraryW(widecFileName);
-	this->lib_list.push_back(load);
+	load = LoadLibrary(widecFileName);
+	this->libraries.push_back(load);
 
 	typedef double (*double_fun_2) (double, double);
 	typedef int (*int_fun) (void);
@@ -30,15 +30,15 @@ Operator* Loader::getOperatorFromDll(std::filesystem::path path)
 	return op;
 }
 
-void Loader::loadDll(std::map<std::string, Operator*>& operation_list, const std::string& folder_path, const std::string& extension)
+void Loader::loadDll(std::map<std::string, Operator*>& operation_list, const std::string& folder, const std::string& extension)
 {
 	std::vector<std::filesystem::path> files;
 
-	for (auto& entry : std::filesystem::directory_iterator(folder_path))
+	for (const auto& entry : std::filesystem::directory_iterator(folder))
 		if (entry.path().extension() == extension)
 			files.push_back(entry.path().c_str());
 
-	for (auto& path : files)
+	for (const auto& path : files)
 	{
 		Operator* op = getOperatorFromDll(path);
 		operation_list[op->getName()] = op;

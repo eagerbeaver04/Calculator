@@ -30,15 +30,15 @@ class Operations
 public:
 	Operations()
 	{
-		this->operation_list["+"] = new Operator("+", 1, true, 2, sum);
-		this->operation_list["-"] = new Operator("-", 1, true, 2, sub);
-		this->operation_list["*"] = new Operator("*", 2, true, 2, mul);
-		this->operation_list["/"] = new Operator("/", 2, true, 2, div_);
+		this->operations["+"] = new Operator("+", 1, true, 2, sum);
+		this->operations["-"] = new Operator("-", 1, true, 2, sub);
+		this->operations["*"] = new Operator("*", 2, true, 2, mul);
+		this->operations["/"] = new Operator("/", 2, true, 2, div_);
 	};
 	Operations(const std::string& folder_path, const std::string& extension): Operations()
 	{
 		Loader* loader = Loader::getInstance(folder_path, extension);
-		loader->loadDll(this->operation_list, folder_path, extension);
+		loader->loadDll(this->operations, folder_path, extension);
 	};
 
 	int getPriority(const std::string& symbol);
@@ -47,12 +47,12 @@ public:
 
 	double ñalculation(const std::string& symbol, double a, double b);
 	~Operations() {
-		for (auto& op : operation_list)
+		for (auto& op : operations)
 			delete op.second;
-		operation_list.clear();
+		operations.clear();
 	}
 private:
-	std::map<std::string, Operator*> operation_list;
+	std::map<std::string, Operator*> operations;
 };
 
 #endif
