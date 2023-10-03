@@ -28,7 +28,7 @@ void Loader::loadDll(std::map<std::string, Operator*>& operation_list, const std
 	for (const auto& path : files)
 	{
 		widecFileName = path.c_str();
-		load = LoadLibrary(widecFileName);
+		load = LoadLibraryW(widecFileName);
 		this->libraries.push_back(load);
 
 		if (load)
