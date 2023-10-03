@@ -36,10 +36,10 @@ public:
 		this->operations["*"] = new Operator("*", 2, true, 2, mul);
 		this->operations["/"] = new Operator("/", 2, true, 2, div_);
 	};
-	Operations(const std::string& folder_path, const std::string& extension): Operations()
+	Operations(const std::string& folder, const std::string& extension): Operations()
 	{
-		Loader* loader = Loader::getInstance(folder_path, extension);
-		loader->loadDll(this->operations, folder_path, extension);
+		Loader* loader = Loader::getInstance(folder, extension);
+		loader->loadDll(this->operations, folder, extension);
 	};
 
 	int getPriority(const std::string& symbol);
@@ -47,7 +47,8 @@ public:
 	int getBinary(const std::string& symbol);
 
 	double ñalculation(const std::string& symbol, double a, double b);
-	~Operations() {
+	~Operations() 
+	{
 		for (auto& op : operations)
 			delete op.second;
 		operations.clear();
