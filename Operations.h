@@ -20,9 +20,10 @@ static double mul(double a, double b)
 
 static double div_(double a, double b)
 {
-	if (!b)
-		throw std::exception();
-	return a / b;
+	if (b)
+		return a / b;
+	std::cerr << std::endl <<"Unavaliable operation: Division by zero"  << std::endl;
+	return a;
 }
 
 class Operations
