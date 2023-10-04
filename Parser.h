@@ -1,5 +1,5 @@
-#ifndef SORTER_H
-#define SORTER_H
+#ifndef PARSER_H
+#define PARSER_H
 
 #include "Operations.h"
 #include <sstream>

@@ -10,14 +10,6 @@
 
 class Loader
 {
-public:
-	static Loader* getInstance(const std::string& folder, const std::string& extension)
-	{
-		static Loader* instance = new Loader(folder, extension);
-		return instance;
-	}
-	std::unique_ptr<Operator> getOperatorFromDll(const HINSTANCE& load);
-	void loadDll(std::map<std::string, std::unique_ptr<Operator>>& operations, const std::string& folder, const std::string& extension);
 private:
 	std::vector< HINSTANCE> libraries;
 	std::string folder;
@@ -41,6 +33,15 @@ private:
 			FreeLibrary(lib);
 		libraries.clear();
 	}
+public:
+	static Loader* getInstance(const std::string& folder, const std::string& extension)
+	{
+		static Loader* instance = new Loader(folder, extension);
+		return instance;
+	}
+	std::unique_ptr<Operator> getOperatorFromDll(const HINSTANCE& load);
+	void loadDll(std::map<std::string, std::unique_ptr<Operator>>& operations, const std::string& folder, const std::string& extension);
+
 };
 
 #endif
