@@ -19,7 +19,9 @@ public:
 	Operator() = default;
 	~Operator() = default;
 	Operator(const Operator& A) = default;
+	Operator(Operator&&) = default;
 	Operator& operator = (const Operator& A) = default;
+	Operator& operator=(Operator&&) = default;
 
 	int getPriority()
 	{
