@@ -3,8 +3,8 @@
 
 int main(int argc, char** argv)
 {
-	std::string folder = "./plugins";//for Visual Studio
-	//std::string folder = "..\\plugins";//for Cmake project
+	//std::string folder = "./plugins";//for Visual Studio
+	std::string folder = "..\\plugins";//for Cmake project
 	std::string extension = ".dll";
 	Calculator app(folder, extension);
 	while (true)

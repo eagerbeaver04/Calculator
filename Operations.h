@@ -26,7 +26,7 @@ public:
 			this->loader.loadDll(this->operations, folder, extension);
 		}
 		else
-			std::cout << std::endl << "Folder for extra operations is not download" << std::endl;
+			std::cerr << std::endl << "Folder for extra operations is not download" << std::endl;
 	};
 
 	int getPriority(const std::string& symbol);

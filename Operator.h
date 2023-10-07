@@ -8,14 +8,10 @@
 class Operator
 {
 public:
-	Operator(const std::string& name, int priority, bool associativity, int binary, std::function<double(double, double)> operation)
-	{
-		this->name = name;
-		this->priority = priority;
-		this->operation = operation;
-		this->associativity = associativity;
-		this->binary = binary;
-	}
+	Operator(const std::string& name, int priority, bool associativity,
+		int binary, const std::function<double(double, double)>& operation)
+		: name(name), priority(priority), associativity(associativity), binary(binary), operation(operation) {};
+
 	Operator() = default;
 	~Operator() = default;
 	Operator(const Operator& A) = default;
