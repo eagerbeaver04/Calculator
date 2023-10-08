@@ -228,24 +228,24 @@ bool Parser::evaluate(const std::string& input)
 
                 if (arguments == 1)
                 {
-                    std::string sc = operations_[sl - 1];
-                    double sc2 = values[sl - 1];
+                    std::string prev_substring = operations_[sl - 1];
+                    double prev_value = values[sl - 1];
                     sl--;
-                    value = calculation(current_substring, sc2, 0);
+                    value = calculation(current_substring, prev_value, 0);
                     if(opAssociativity(current_substring))
-                        std::cout << current_substring << " " << sc << " = " << value << std::endl;
+                        std::cout << current_substring << " " << prev_substring << " = " << value << std::endl;
                     else
-                        std::cout  << sc << " " << current_substring  << " = " << value << std::endl;
+                        std::cout  << prev_substring << " " << current_substring  << " = " << value << std::endl;
                 }
                 else
                 {
-                    std::string sc1 = operations_[sl - 2];
-                    double sc21 = values[sl - 2];
-                    std::cout << sc1 << " " << current_symbol << " ";
-                    std::string sc2 = operations_[sl - 1];
-                    double sc22 = values[sl - 1];
-                    value = calculation(current_substring, sc21, sc22);
-                    std::cout << sc2 << " = " << value << std::endl;
+                    std::string prev_substring1 = operations_[sl - 2];
+                    double prev_value1 = values[sl - 2];
+                    std::cout << prev_substring1 << " " << current_symbol << " ";
+                    std::string prev_substring2 = operations_[sl - 1];
+                    double prev_value2 = values[sl - 1];
+                    value = calculation(current_substring, prev_value1, prev_value2);
+                    std::cout << prev_substring2 << " = " << value << std::endl;
                     sl -= 2;
                 }
                 operations_[sl] = res;
