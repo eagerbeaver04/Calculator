@@ -1,5 +1,4 @@
-#ifndef CALCULATOR_H
-#define CALCULATOR_H
+#pragma once
 
 #include "Parser.h"
 
@@ -10,28 +9,20 @@ private:
 	std::string input;
 	std::string output;
 	
-
 public:
 	Calculator(const std::string& folder, const std::string& extension) : 
 		parser(std::make_unique<Parser>(folder, extension)), input(""), output("") {};
 
 	~Calculator() = default;
-	Calculator() = default;
-	Calculator(const Calculator&) = default;
-	Calculator(Calculator&&) = default;
-	Calculator& operator=(Calculator const&) = default;
-	Calculator& operator=(Calculator&&) = default;
 
-	void setInput(const std::string& input)
+	void setInput(const std::string& input_)
 	{
-		this->input = input;
+		input = input_;
 	}
 	void calculation()
 	{
-		if (this->parser->shuntingYard(this->input, this->output))
-			this->parser->executionOrder(this->output);
+		if (parser->parse(this->input, this->output))
+			parser->evaluate(this->output);
 	}
 
 };
-
-#endif
