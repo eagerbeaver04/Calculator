@@ -18,6 +18,8 @@ private:
 	bool isIdent(char symbol);
 	bool isLetter(char symbol);
 	bool isLetter(const std::string& symbol);
+	bool parenthesesBalance(std::stack<std::string>& operations_, char current_symbol, std::string& output);
+	void addOperatorInStack(std::stack<std::string>& operations_, std::string& current_symbol, std::string& output);
 
 public:
 	bool parse(const std::string& input, std::string& output);
