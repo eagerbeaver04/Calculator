@@ -26,10 +26,9 @@ public:
 	void evaluate(const std::string& input);
 	double calculation(const std::string& symbol, double a, double b);
 
-	Parser(const std::string& folder, const std::string& extension)
-	{
-		operations = std::make_unique<Operations>(folder, extension);
-	}
+	Parser(const std::string& folder, const std::string& extension) :
+		operations(std::make_unique<Operations>(folder, extension)) {};
+
 	~Parser() = default;
 
 };

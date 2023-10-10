@@ -148,7 +148,7 @@ void Parser::parse(const std::string& input, std::string& output)
                     else
                         break;
                     i++;
-                }
+                }       
                 if (isFunction(current_substring))
                     operations_.push(current_substring);
             }
@@ -231,8 +231,8 @@ void Parser::evaluate(const std::string& input)
                 {
                     std::string prev_substring1 = operations_[last_index - 2];
                     double prev_value1 = values[last_index - 2];
-                    std::cout << prev_substring1 << " " << current_substring << " ";
                     value = calculation(current_substring, prev_value1, prev_value);
+                    std::cout << prev_substring1 << " " << current_substring << " ";
                     std::cout << prev_substring << " = " << value << std::endl;
                     last_index -= 2;
                 }
