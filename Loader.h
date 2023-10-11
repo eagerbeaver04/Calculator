@@ -16,7 +16,12 @@ private:
 
 public:
 	Loader(const std::string& folder, const std::string& extension) : libraries({}), folder(folder), extension(extension) {};
+
 	Loader() = default;
+	Loader(const Loader&) = default;
+	Loader(Loader&&) = default;
+	Loader& operator = (const Loader&) = default;
+	Loader& operator = (Loader&&) = default;
 
 	~Loader()
 	{
@@ -26,5 +31,4 @@ public:
 	}
 	void getOperatorFromDll(std::map<std::string, std::unique_ptr<Operator>>& operations, const HINSTANCE& load);
 	void loadDll(std::map<std::string, std::unique_ptr<Operator>>& operations, const std::string& folder, const std::string& extension);
-
 };

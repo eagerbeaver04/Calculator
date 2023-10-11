@@ -1,7 +1,7 @@
 #include "Calculator.h"
 
 
-int main(int argc, char** argv)
+int main()
 {
 	std::string folder = "plugins";
 	std::string extension = ".dll";
@@ -20,7 +20,6 @@ int main(int argc, char** argv)
 			std::cerr << error_message.what() << std::endl;
 		}
 	}
-
 	return 0;
 
 }

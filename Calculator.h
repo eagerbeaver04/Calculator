@@ -8,12 +8,10 @@ private:
 	std::unique_ptr<Parser> parser;
 	std::string input;
 	std::string output;
-	
-public:
-	Calculator(const std::string& folder, const std::string& extension) : 
-		parser(std::make_unique<Parser>(folder, extension)), input(""), output("") {};
 
-	~Calculator() = default;
+public:
+	Calculator(const std::string& folder, const std::string& extension) :
+		parser(std::make_unique<Parser>(folder, extension)), input(""), output("") {};
 
 	void setInput(const std::string& input_)
 	{

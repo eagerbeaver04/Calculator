@@ -31,12 +31,16 @@ public:
 			std::cerr << std::endl << "Folder for extra operations is not download" << std::endl;
 	};
 
+	~Operations() = default;
+	Operations(const Operations&) = default;
+	Operations(Operations&&) = default;
+	Operations& operator = (const Operations&) = default;
+	Operations& operator = (Operations&&) = default;
+
 	int getPriority(const std::string& symbol);
 	bool getAssociativity(const std::string& symbol);
 	int getBinary(const std::string& symbol);
 
 	double calculation(const std::string& symbol, double a, double b);
-	~Operations() = default;
-
 
 };
